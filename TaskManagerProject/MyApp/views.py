@@ -1,17 +1,24 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
+
 from .models import Task
 from .forms import TaskForm
 
 
-def index(request):
+def index(request: HttpRequest):
     tasks = Task.objects.order_by('-id')
-    return render(request, 'MyApp/index.html', {'title': 'Главная страница сайта', 'tasks': tasks})
+    context = {
+        'title': 'Главная страница сайта',
+        'tasks': tasks,
+    }
+    return render(request, 'MyApp/index.html', context)
 
-def about(request):
+
+def about(request: HttpRequest):
     return render(request, 'MyApp/about.html')
 
-def create(request):
+
+def create(request: HttpRequest):
     error = ''
     if request.method == 'POST':
         form = TaskForm(request.POST)
