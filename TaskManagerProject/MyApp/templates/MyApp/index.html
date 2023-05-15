@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Главная страница</h1>
+    <h1>Главная страница. Счетчик посещений: {{ num_visit }}</h1>
     {% if tasks %}
         {% for el in tasks %}
             <div class="alert alert-warning mt-2">
